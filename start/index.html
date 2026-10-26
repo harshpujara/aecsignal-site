@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started | Signal by Actuality</title>
+<meta name="description" content="Tell us about your firm and see what Signal finds in your market.">
+<link rel="canonical" href="https://aecsignal.ai/start/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Signal by Actuality">
+<meta property="og:title" content="Get started">
+<meta property="og:description" content="Tell us about your firm and see what Signal finds in your market.">
+<meta property="og:url" content="https://aecsignal.ai/start/">
+<meta property="og:image" content="https://aecsignal.ai/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+html,body{height:100%}
+body{display:flex;flex-direction:column;min-height:100%}
+.topbar{position:sticky;top:0;z-index:5;background:var(--paper)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:16px}
+.progress{height:3px;background:var(--line)}
+.progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .4s cubic-bezier(.2,.7,.2,1)}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+main{flex:1;display:flex}
+form{flex:1;display:flex}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px 120px}
+.step{width:100%;max-width:640px;border:0;margin:0;padding:0;min-width:0}
+.js .step{display:none}
+.js .step.on{display:block;animation:stepIn .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes stepIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.no-js-note{display:none}
+.step + .step{margin-top:72px}
+.js .step + .step{margin-top:0}
+
+.q{margin:0 0 8px;padding:0;font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.2vw,44px);line-height:1.08;letter-spacing:-.01em}
+.q .req{color:var(--accent)}
+.hint{margin:0 0 28px;font-size:15px;color:var(--muted)}
+.intro h1{margin:0 0 16px;font-family:var(--serif);font-weight:400;font-size:clamp(44px,6vw,72px);line-height:1;letter-spacing:-.015em}
+.intro p{margin:0 0 32px;font-size:18px;line-height:1.55;color:var(--muted);max-width:520px}
+
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:24px}
+.field label{font-size:15px;font-weight:500}
+.text{width:100%;font:inherit;font-size:22px;color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--line-strong);padding:10px 0;border-radius:0;transition:border-color .2s}
+.text::placeholder{color:#B4B6B0}
+.text:focus{outline:none;border-bottom-color:var(--accent)}
+textarea.text{resize:vertical;min-height:110px;font-size:19px;line-height:1.5}
+
+.opts{display:flex;flex-direction:column;gap:10px;max-width:520px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:16px;line-height:1.4;cursor:pointer;transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--line-strong)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.key{flex:0 0 auto;display:inline-grid;place-items:center;width:22px;height:22px;border:1px solid var(--line-strong);border-radius:5px;font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--paper);margin-top:1px}
+.opt small{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.opt:has(input:checked){border-color:var(--ink);background:#FBFBF9}
+.opt:has(input:checked) .key{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.other-input{display:none;margin-top:4px;max-width:520px}
+.other-input.show{display:block}
+
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:32px}
+.enter{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.err{display:none;margin-top:16px;font-size:14px;color:#B23A0E}
+.err.show{display:block}
+.consent{margin-top:18px;max-width:520px;font-size:13px;line-height:1.5;color:var(--muted)}
+
+.navbtns{position:fixed;right:24px;bottom:24px;display:flex;gap:6px;z-index:5}
+.navbtns button{width:40px;height:36px;border:1px solid var(--line);background:var(--white);border-radius:8px;cursor:pointer;display:grid;place-items:center}
+.navbtns button:disabled{opacity:.4;cursor:default}
+.hp{position:absolute;left:-9999px}
+
+.done h2{margin:0 0 16px;font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.02}
+.done p{margin:0 0 28px;font-size:18px;line-height:1.55;color:var(--muted);max-width:520px}
+@media (max-width:560px){.text{font-size:19px}.navbtns{right:16px;bottom:16px}}
+</style>
+<script>document.documentElement.className='js';</script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a href="../" class="brand" aria-label="Signal by Actuality, home">
+      <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="8" cy="20" r="3" fill="#D9541E"/><path d="M8 11.5a8.5 8.5 0 0 1 8.5 8.5" stroke="#121212" stroke-width="2.4" stroke-linecap="round"/><path d="M8 4a16 16 0 0 1 16 16" stroke="#121212" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span class="brand-name">Signal</span><span class="brand-by">by Actuality</span>
+    </a>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+</div>
+
+<main>
+<form name="signal-signup" method="POST" action="thanks/" data-netlify="true" netlify-honeypot="bot-field" id="f" novalidate>
+<input type="hidden" name="form-name" value="signal-signup">
+<input type="hidden" name="subject" value="New Signal signup">
+<input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
+<input type="hidden" name="referrer"><input type="hidden" name="landing_page">
+<p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+<div class="stage">
+
+<!-- 0: intro -->
+<section class="step intro" data-step="intro">
+  <h1>See what Signal finds in your market.</h1>
+  <p>Tell us about your firm and how you find work today. It takes about two minutes.</p>
+  <div class="actions"><button type="button" class="btn btn-lg" data-next>Start</button><span class="enter">press Enter ↵</span></div>
+</section>
+
+<!-- 1: about you -->
+<fieldset class="step" data-step="about">
+  <legend class="q">Tell us about yourself <span class="req">*</span></legend>
+  <p class="hint">We'll only use this to get back to you.</p>
+  <div class="field"><label for="name">Name</label><input class="text" id="name" name="name" autocomplete="name" required placeholder="Your name"></div>
+  <div class="field"><label for="email">Work email</label><input class="text" id="email" name="email" type="email" autocomplete="email" required placeholder="name@yourfirm.com"></div>
+  <div class="field"><label for="website">Company website</label><input class="text" id="website" name="website" autocomplete="url" required placeholder="yourfirm.com"></div>
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button><span class="enter">press Enter ↵</span></div>
+</fieldset>
+
+<!-- 2: firm type -->
+<fieldset class="step" data-step="firm_type" data-single>
+  <legend class="q">Which best describes your firm? <span class="req">*</span></legend>
+  <p class="hint">Choose one.</p>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="firm_type" value="Architecture" required><span class="key">A</span><span>Architecture</span></label>
+    <label class="opt"><input type="radio" name="firm_type" value="Engineering"><span class="key">B</span><span>Engineering</span></label>
+    <label class="opt"><input type="radio" name="firm_type" value="Architecture and engineering"><span class="key">C</span><span>Architecture and engineering</span></label>
+    <label class="opt"><input type="radio" name="firm_type" value="General contractor"><span class="key">D</span><span>General contractor</span></label>
+    <label class="opt"><input type="radio" name="firm_type" value="Subcontractor"><span class="key">E</span><span>Subcontractor</span></label>
+    <label class="opt"><input type="radio" name="firm_type" value="Other" data-other><span class="key">F</span><span>Other</span></label>
+  </div>
+  <input class="text other-input" name="firm_type_other" placeholder="Tell us what kind of firm" aria-label="Other firm type">
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button></div>
+</fieldset>
+
+<!-- 3: firm size -->
+<fieldset class="step" data-step="firm_size" data-single>
+  <legend class="q">How many people work at your firm? <span class="req">*</span></legend>
+  <p class="hint">Choose one.</p>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="firm_size" value="1 to 10" required><span class="key">A</span><span>1 to 10</span></label>
+    <label class="opt"><input type="radio" name="firm_size" value="11 to 50"><span class="key">B</span><span>11 to 50</span></label>
+    <label class="opt"><input type="radio" name="firm_size" value="51 to 200"><span class="key">C</span><span>51 to 200</span></label>
+    <label class="opt"><input type="radio" name="firm_size" value="More than 200"><span class="key">D</span><span>More than 200</span></label>
+  </div>
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button></div>
+</fieldset>
+
+<!-- 4: interests -->
+<fieldset class="step" data-step="interests" data-multi="interests">
+  <legend class="q">What would help your team most? <span class="req">*</span></legend>
+  <p class="hint">Choose as many as you like.</p>
+  <input type="hidden" name="interests">
+  <div class="opts">
+    <label class="opt"><input type="checkbox" value="Projects before the RFP"><span class="key">A</span><span>Projects before they go to RFP<small>Spotted in budgets, council decisions and permits in your market</small></span></label>
+    <label class="opt"><input type="checkbox" value="Live RFPs matched to our firm"><span class="key">B</span><span>Live RFPs matched to your firm<small>One feed instead of checking every portal</small></span></label>
+    <label class="opt"><input type="checkbox" value="Go/no-go briefs"><span class="key">C</span><span>Go/no-go briefs<small>Scope, timeline and requirements on one page</small></span></label>
+    <label class="opt"><input type="checkbox" value="Writing proposals faster"><span class="key">D</span><span>Writing proposals faster</span></label>
+    <label class="opt"><input type="checkbox" value="Other" data-other><span class="key">E</span><span>Other</span></label>
+  </div>
+  <input class="text other-input" name="interests_other" placeholder="What else would help?" aria-label="Other interest">
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button></div>
+</fieldset>
+
+<!-- 5: regions -->
+<fieldset class="step" data-step="regions">
+  <legend class="q">Which states or provinces do your projects come from? <span class="req">*</span></legend>
+  <p class="hint">List as many as you work in.</p>
+  <div class="field"><input class="text" id="regions" name="regions" required placeholder="For example, Ontario, New York, New Jersey" aria-label="States or provinces"></div>
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button><span class="enter">press Enter ↵</span></div>
+</fieldset>
+
+<!-- 6: project types -->
+<fieldset class="step" data-step="project_types" data-multi="project_types">
+  <legend class="q">What types of projects do you go after? <span class="req">*</span></legend>
+  <p class="hint">Choose as many as you like.</p>
+  <input type="hidden" name="project_types">
+  <div class="opts">
+    <label class="opt"><input type="checkbox" value="Municipal and civic"><span class="key">A</span><span>Municipal and civic</span></label>
+    <label class="opt"><input type="checkbox" value="Education"><span class="key">B</span><span>Education</span></label>
+    <label class="opt"><input type="checkbox" value="Healthcare"><span class="key">C</span><span>Healthcare</span></label>
+    <label class="opt"><input type="checkbox" value="Transportation and infrastructure"><span class="key">D</span><span>Transportation and infrastructure</span></label>
+    <label class="opt"><input type="checkbox" value="Water and wastewater"><span class="key">E</span><span>Water and wastewater</span></label>
+    <label class="opt"><input type="checkbox" value="Commercial"><span class="key">F</span><span>Commercial</span></label>
+    <label class="opt"><input type="checkbox" value="Residential"><span class="key">G</span><span>Residential</span></label>
+    <label class="opt"><input type="checkbox" value="Other" data-other><span class="key">H</span><span>Other</span></label>
+  </div>
+  <input class="text other-input" name="project_types_other" placeholder="Which other types?" aria-label="Other project types">
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button></div>
+</fieldset>
+
+<!-- 7: how they find work -->
+<fieldset class="step" data-step="how_find" data-multi="how_find">
+  <legend class="q">How do you find new projects today? <span class="req">*</span></legend>
+  <p class="hint">Choose as many as you like.</p>
+  <input type="hidden" name="how_find">
+  <div class="opts">
+    <label class="opt"><input type="checkbox" value="Referrals and relationships"><span class="key">A</span><span>Referrals and relationships</span></label>
+    <label class="opt"><input type="checkbox" value="Checking bid portals ourselves"><span class="key">B</span><span>Checking bid portals ourselves</span></label>
+    <label class="opt"><input type="checkbox" value="A paid bid service"><span class="key">C</span><span>A paid bid service</span></label>
+    <label class="opt"><input type="checkbox" value="Invitations from clients"><span class="key">D</span><span>Invitations from clients</span></label>
+    <label class="opt"><input type="checkbox" value="Other" data-other><span class="key">E</span><span>Other</span></label>
+  </div>
+  <input class="text other-input" name="how_find_other" placeholder="How else do you find work?" aria-label="Other ways you find work">
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button></div>
+</fieldset>
+
+<!-- 8: portals -->
+<fieldset class="step" data-step="portals" data-single>
+  <legend class="q">Roughly how many bid portals or sites does your team check? <span class="req">*</span></legend>
+  <p class="hint">Choose one.</p>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="portals" value="None" required><span class="key">A</span><span>None</span></label>
+    <label class="opt"><input type="radio" name="portals" value="1 to 5"><span class="key">B</span><span>1 to 5</span></label>
+    <label class="opt"><input type="radio" name="portals" value="6 to 15"><span class="key">C</span><span>6 to 15</span></label>
+    <label class="opt"><input type="radio" name="portals" value="More than 15"><span class="key">D</span><span>More than 15</span></label>
+  </div>
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button></div>
+</fieldset>
+
+<!-- 9: digest -->
+<fieldset class="step" data-step="digest" data-single>
+  <legend class="q">Want a free weekly email of projects matched to your firm? <span class="req">*</span></legend>
+  <p class="hint">For the next four weeks, on us.</p>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="digest" value="Yes" required><span class="key">A</span><span>Yes, send me the weekly digest</span></label>
+    <label class="opt"><input type="radio" name="digest" value="Not right now"><span class="key">B</span><span>Not right now</span></label>
+  </div>
+  <p class="consent">By choosing yes, you agree to receive weekly emails about Signal from Actuality Live Inc. You can unsubscribe at any time.</p>
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="button" class="btn" data-next>OK</button></div>
+</fieldset>
+
+<!-- 10: message -->
+<fieldset class="step" data-step="message">
+  <legend class="q">Anything else you'd like us to know?</legend>
+  <p class="hint">Optional. A project you missed, a portal you hate checking, anything.</p>
+  <div class="field"><textarea class="text" id="message" name="message" placeholder="Type your message here" aria-label="Message"></textarea></div>
+  <div class="err" role="alert"></div>
+  <div class="actions"><button type="submit" class="btn btn-lg" id="send">Send</button><span class="enter">press Cmd ⌘ + Enter ↵</span></div>
+</fieldset>
+
+<!-- done -->
+<section class="step done" data-step="done" tabindex="-1">
+  <h2 id="done-h">Thanks. We've got it.</h2>
+  <p id="done-p">We read every response ourselves and we'll be in touch by email.</p>
+  <a href="../" class="btn">Back to Signal</a>
+</section>
+
+</div>
+</form>
+</main>
+
+<div class="navbtns" aria-label="Question navigation">
+  <button type="button" id="prev" aria-label="Previous question"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
+  <button type="button" id="nextBtn" aria-label="Next question"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+</div>
+
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+  var form=document.getElementById('f');
+  var steps=[].slice.call(form.querySelectorAll('.step'));
+  var questions=steps.filter(function(s){return s.dataset.step!=='intro'&&s.dataset.step!=='done';});
+  var i=0, sending=false, done=false;
+  var bar=document.getElementById('bar'), count=document.getElementById('count');
+  var prev=document.getElementById('prev'), nextBtn=document.getElementById('nextBtn');
+
+  // fill source fields
+  var src=window.signalSource?window.signalSource():{};
+  ['utm_source','utm_medium','utm_campaign','referrer','landing_page'].forEach(function(k){form.elements[k].value=src[k]||'';});
+
+  function current(){return steps[i];}
+  function show(n,back){
+    steps[i].classList.remove('on');
+    i=Math.max(0,Math.min(n,steps.length-1));
+    var s=steps[i];
+    s.classList.add('on');
+    var qi=questions.indexOf(s);
+    var answered=qi<0?(s.dataset.step==='done'?questions.length:0):qi;
+    bar.style.width=(answered/questions.length*100)+'%';
+    count.textContent=qi<0?'':(qi+1)+' of '+questions.length;
+    prev.disabled=(i===0||done);
+    nextBtn.disabled=(s.dataset.step==='done'||s.dataset.step==='message');
+    var focusEl=s.querySelector('input.text:not(.other-input),textarea,input[type=radio],input[type=checkbox],[data-next]');
+    if(s.dataset.step==='done'){s.focus();}
+    else if(focusEl&&!(window.matchMedia('(pointer:coarse)').matches&&focusEl.classList.contains('text'))){setTimeout(function(){focusEl.focus({preventScroll:true});},60);}
+    window.scrollTo(0,0);
+  }
+
+  function setErr(s,msg){var e=s.querySelector('.err');if(!e)return;e.textContent=msg||'';e.classList.toggle('show',!!msg);}
+  function validate(s){
+    var step=s.dataset.step;
+    if(step==='about'){
+      var bad=['name','email','website'].filter(function(n){var el=form.elements[n];return !el.value.trim()||!el.checkValidity();});
+      if(bad.length){
+        var el=form.elements[bad[0]];
+        setErr(s, bad[0]==='email'&&el.value.trim()?'Enter a valid email address, like name@yourfirm.com.':'Fill in your name, work email and company website to continue.');
+        el.focus();return false;
+      }
+    }
+    if(step==='regions'&&!form.elements.regions.value.trim()){setErr(s,'Add at least one state or province to continue.');form.elements.regions.focus();return false;}
+    if(s.hasAttribute('data-single')&&!s.querySelector('input[type=radio]:checked')){setErr(s,'Choose an option to continue.');return false;}
+    if(s.dataset.multi&&!s.querySelector('input[type=checkbox]:checked')){setErr(s,'Choose at least one option to continue.');return false;}
+    setErr(s,'');return true;
+  }
+  function next(){var s=current();if(s.dataset.step==='done')return;if(s.dataset.step==='message'){submit();return;}if(validate(s))show(i+1);}
+
+  // other-inputs and multi-group sync
+  steps.forEach(function(s){
+    var other=s.querySelector('.other-input');
+    s.addEventListener('change',function(e){
+      var t=e.target;
+      if(other){var o=s.querySelector('[data-other]');other.classList.toggle('show',!!(o&&o.checked));if(t.hasAttribute('data-other')&&t.checked){setTimeout(function(){other.focus();},30);}}
+      if(s.dataset.multi){
+        form.elements[s.dataset.multi].value=[].slice.call(s.querySelectorAll('input[type=checkbox]:checked')).map(function(c){return c.value;}).join('; ');
+      }
+      setErr(s,'');
+      if(t.type==='radio'&&s.hasAttribute('data-single')&&!t.hasAttribute('data-other')){setTimeout(function(){if(current()===s)next();},380);}
+    });
+  });
+
+  form.addEventListener('click',function(e){if(e.target.closest('[data-next]')){e.preventDefault();next();}});
+  prev.addEventListener('click',function(){if(i>0)show(i-1,true);});
+  nextBtn.addEventListener('click',next);
+
+  document.addEventListener('keydown',function(e){
+    var s=current(), t=e.target;
+    if(e.key==='Enter'){
+      if(t.tagName==='TEXTAREA'){if(e.metaKey||e.ctrlKey){e.preventDefault();submit();}return;}
+      if(t.tagName==='A')return;
+      e.preventDefault();next();return;
+    }
+    var typing=(t.tagName==='INPUT'&&t.classList.contains('text'))||t.tagName==='TEXTAREA';
+    if(typing||e.metaKey||e.ctrlKey||e.altKey)return;
+    if(/^[a-hA-H]$/.test(e.key)){
+      var inputs=s.querySelectorAll('.opt input');var idx=e.key.toUpperCase().charCodeAt(0)-65;
+      if(inputs[idx]){e.preventDefault();inputs[idx].click();}
+    }
+  });
+
+  function submit(){
+    if(sending||done)return;
+    // make sure every required step is answered
+    for(var k=0;k<questions.length;k++){if(!validate(questions[k])){show(steps.indexOf(questions[k]));return;}}
+    sending=true;
+    var btn=document.getElementById('send');btn.textContent='Sending…';btn.disabled=true;
+    var firm=form.elements.website.value.trim();
+    form.elements.subject.value='New Signal signup: '+form.elements.name.value.trim()+(firm?' ('+firm+')':'');
+    var body=new URLSearchParams(new FormData(form)).toString();
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+      .then(function(r){if(!r.ok)throw new Error(r.status);
+        done=true;
+        var first=form.elements.name.value.trim().split(/\s+/)[0];
+        document.getElementById('done-h').textContent='Thanks, '+first+'. We\u2019ve got it.';
+        if(form.elements.digest.value==='Yes'){document.getElementById('done-p').textContent='We read every response ourselves. Watch for your first digest at '+form.elements.email.value.trim()+'.';}
+        show(steps.length-1);
+      })
+      .catch(function(){
+        sending=false;btn.textContent='Send';btn.disabled=false;
+        setErr(current(),'Your answers didn\u2019t send. Check your connection and press Send again.');
+      });
+  }
+  form.addEventListener('submit',function(e){e.preventDefault();submit();});
+
+  steps[0].classList.add('on');show(0);
+})();
+</script>
+</body>
+</html>
