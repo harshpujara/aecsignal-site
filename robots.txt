@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /start/thanks/
 
-Sitemap: https://aecsignal.ai/sitemap.xml
+Sitemap: https://aecsignal.si/sitemap.xml

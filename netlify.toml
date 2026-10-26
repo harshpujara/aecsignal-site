@@ -1,4 +1,4 @@
-# Netlify settings for aecsignal.ai
+# Netlify settings for aecsignal.si
 [[headers]]
   for = "/assets/fonts/*"
   [headers.values]

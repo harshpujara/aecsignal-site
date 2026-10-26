@@ -82,3 +82,20 @@ img{max-width:100%}
 
 h1,h2,h3{text-wrap:balance}
 p{text-wrap:pretty}
+
+@media (max-width:420px){.nav-links .nav-blog{display:none}}
+
+.more{margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
+.more ul{list-style:none;padding:0;margin:12px 0 0}
+.more li{margin:0 0 10px}
+.more a{font-family:var(--serif);font-size:24px;line-height:1.2;color:var(--ink);text-decoration:none}
+.more a:hover{text-decoration:underline}
+.prose h3{font-family:var(--sans);font-size:19px;font-weight:600;margin:32px 0 6px;color:var(--ink)}
+.prose ul,.prose ol{padding-left:22px}
+.prose li{margin:0 0 8px}
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:14px;background:var(--white)}
+.table-wrap table{border-collapse:collapse;width:100%;min-width:600px;font-size:15px}
+.table-wrap th,.table-wrap td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--soft);line-height:1.45}
+.table-wrap th{font-family:var(--mono);font-size:12px;font-weight:400;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:#FBFBF9}
+.table-wrap tr:last-child td{border-bottom:0}
+.table-wrap td:first-child{color:var(--ink);font-weight:500}
